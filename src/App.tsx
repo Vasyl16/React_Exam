@@ -1,6 +1,15 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
+import { MainLayout } from './layouts/MainLayout';
+
+import './styles/App.css';
+import './styles/theme.css';
+
 export const App: React.FC = () => {
-  return <BrowserRouter></BrowserRouter>;
+  return (
+    <BrowserRouter>
+      <MainLayout />
+    </BrowserRouter>
+  );
 };
