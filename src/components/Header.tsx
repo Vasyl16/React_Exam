@@ -6,7 +6,7 @@ export const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="bg-main-bg shadow-main transition-theme">
+    <header className="bg-main-bg shadow-main transition-theme top-0 sticky z-10">
       <div className="flex justify-between items-center gap-[20px] p-[20px] min-h-[90px] ">
         <div>
           <p className="font-logo text-[30px] transition-theme">Movie.okten</p>
@@ -47,7 +47,7 @@ export const Header: React.FC = () => {
             >
               <img
                 className="h-[46px] w-[46px] rounded-full"
-                src="/public/img/header/header-avatar.webp"
+                src="/public/img/header/header-avatar.png"
               />
               <p className="text-[16px] font-semibold">Vasyl </p>
             </button>

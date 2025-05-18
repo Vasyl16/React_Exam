@@ -11,7 +11,7 @@ export const AppRoutes: React.FC = () => {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
 
-        <Route path="/movie/:id" element={<Movie />} />
+        <Route path="movie/:id" element={<Movie />} />
       </Route>
     </Routes>
   );

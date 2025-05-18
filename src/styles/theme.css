@@ -5,6 +5,8 @@
 
   --font-logo: var(--logo-font-family);
 
+  --color-main-button-bg: var(--button-bg);
+
   --color-input-outline: black;
   --color-input-text: black;
 
@@ -26,12 +28,9 @@
   --button-text-color: black;
 
   --button-bg: rgba(98, 70, 234, 1);
-  --button-text: black;
 
   --input-bg: white;
   --input-border: transparent;
-
-  --logo-font-family: 'Playwrite DK Loopet';
 }
 
 .dark {
@@ -45,7 +44,6 @@
   --main-text-color: white;
 
   --button-bg: rgb(243, 50, 140);
-  --button-text: white;
 
   --input-bg: #dedede;
 }

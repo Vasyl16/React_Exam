@@ -1,5 +1,12 @@
 import React from 'react';
 
+import 'swiper/swiper-bundle.css';
+import { Hero } from '../components/Hero';
+
 export const Home: React.FC = () => {
-  return <div>Home</div>;
+  return (
+    <main>
+      <Hero />
+    </main>
+  );
 };

@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { MainLayout } from './layouts/MainLayout';
-
 import './styles/App.css';
 import './styles/theme.css';
 import { ThemeProvider } from './context/theme/themeContext';
+import { AppRoutes } from './routes/AppRoutes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 export const App: React.FC = () => {
   useEffect(() => {
@@ -13,10 +15,12 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <MainLayout />
-      </BrowserRouter>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
