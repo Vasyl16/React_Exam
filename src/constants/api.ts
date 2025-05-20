@@ -6,4 +6,6 @@ export const GENRES_MOVIE = 'genre/movie/list';
 
 export const All_MOVIE = 'discover/movie';
 
+export const SEARCH_MOVIES = 'search/movie';
+
 export const MOVIE_IMAGE_FULL_PATH = 'https://image.tmdb.org/t/p/original/';

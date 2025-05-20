@@ -33,3 +33,10 @@ export type MovieOptionsType = {
   genreId?: number;
   sortBy: string;
 };
+
+export type SearchMovieType = {
+  title: string;
+  vote_average: number;
+  poster_path: string;
+  overview: string;
+};

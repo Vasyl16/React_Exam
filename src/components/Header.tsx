@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import StarRatings from 'react-star-ratings';
 
 import { useTheme } from '../context/theme/useTheme';
+import { truncateText } from '../helpers/truncateText';
+import { useGetSearchMovies } from '../api/query/useGetSearchMovies';
+import { getImagePath } from '../helpers/getImagePath';
+import { Link } from 'react-router-dom';
+import { useDebounce } from '../hooks/useDebounce';
 
 export const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+
+  const [searchText, setSearchText] = useState('');
+
+  const { debounceValue: seartchTextDebounce } =
+    useDebounce<string>(searchText);
+
+  const { data: searchMovies = [], isLoading: isLoadingSearchMovies } =
+    useGetSearchMovies(
+      seartchTextDebounce,
+      seartchTextDebounce.trim().length > 0
+    );
 
   return (
     <header className="bg-main-bg shadow-main transition-theme top-0 sticky z-10">
@@ -12,10 +29,67 @@ export const Header: React.FC = () => {
           <p className="font-logo text-[30px] transition-theme">Movie.okten</p>
         </div>
 
-        <input
-          className="text-[18px] bg-input-bg text-input-text flex-1 max-w-[500px] rounded-[10px] p-[10px]  shadow-[-30px_-10px_70px_rgba(0,0,0,0.1)] focus:outline-input-outline"
-          placeholder="Type to search movie"
-        />
+        <div className="relative flex-1 max-w-[500px]">
+          <input
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            className="text-[18px] bg-input-bg text-input-text w-full rounded-[10px] p-[10px]  shadow-[-30px_-10px_70px_rgba(0,0,0,0.1)] focus:outline-input-outline"
+            placeholder="Type to search movie"
+          />
+          <div
+            className={`
+          absolute duration-300 ease-in-out  custom-scrollbar h-[50vh] overflow-y-scroll w-full top-[calc(100%+10px)] left-0 rounded-[10px] shadow bg-dropdown-bg border border-dropdown-border
+         ${
+           searchText
+             ? 'opacity-100'
+             : 'translate-y-[20px] opacity-0 pointer-events-nonee'
+         }
+         
+          `}
+          >
+            {isLoadingSearchMovies ? (
+              <svg className="h-[30px] w-[30px] object-cover m-[20px_auto_0] spin-endless stroke-main-text duration-500 ">
+                <use href="/icons/sprite.svg#loader-icon"></use>
+              </svg>
+            ) : searchMovies.length === 0 ? (
+              <p className="text-center text-[20px] mt-[20px]">
+                {seartchTextDebounce && 'Noting is found'}
+              </p>
+            ) : (
+              searchMovies.map((searchMovie, i) => (
+                <Link
+                  to=""
+                  key={i}
+                  className="block px-4 py-2 duration-300 hover:bg-dropdown-list-bg cursor-pointer"
+                >
+                  <article className="flex gap-[20px]">
+                    <img
+                      src={getImagePath(searchMovie.poster_path)}
+                      className="h-[90px] w-[70px] object-cover rounded-[8px]"
+                    />
+
+                    <div className="flex flex-col gap-[3px] ">
+                      <h3 className="text-[18px]">{searchMovie.title}</h3>
+
+                      <p className="text-[15px]">
+                        {truncateText(searchMovie.overview, 50)}
+                      </p>
+
+                      <StarRatings
+                        rating={searchMovie.vote_average}
+                        starRatedColor="#fbbf24"
+                        numberOfStars={10}
+                        starDimension="20px"
+                        starSpacing="2px"
+                        name="rating"
+                      />
+                    </div>
+                  </article>
+                </Link>
+              ))
+            )}
+          </div>
+        </div>
 
         <div className="flex gap-[20px] items-center">
           <div className="items-center flex">
