@@ -47,7 +47,7 @@ export const Header: React.FC = () => {
             >
               <img
                 className="h-[46px] w-[46px] rounded-full"
-                src="/public/img/header/header-avatar.png"
+                src="/img/header/header-avatar.png"
               />
               <p className="text-[16px] font-semibold">Vasyl </p>
             </button>

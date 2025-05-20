@@ -1,13 +1,14 @@
 import React from 'react';
 import { SwiperSlide, Swiper } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-import ContentLoader from 'react-content-loader';
 
 import 'swiper/swiper-bundle.css';
+
 import { useGetNewestMovies } from '../api/query/useGetNewestMovies';
 import type { NewestMovieData } from '../types/movieTypes';
 import { getImagePath } from '../helpers/getImagePath';
 import { truncateText } from '../helpers/truncateText';
+import { SkeletonComp } from './SkeletonComp';
 
 export const Hero: React.FC = () => {
   const { data, isLoading } = useGetNewestMovies();
@@ -15,15 +16,7 @@ export const Hero: React.FC = () => {
   if (isLoading) {
     return (
       <section className="w-full h-[calc(100svh-90px)]">
-        <ContentLoader
-          speed={2}
-          width="100%"
-          height="100%"
-          backgroundColor="#cacaca"
-          foregroundColor="#ecebeb"
-        >
-          <rect x="0" y="0" width="100%" height="100%" />
-        </ContentLoader>
+        <SkeletonComp width="100%" height="100%" rounded="0" />
       </section>
     );
   }
