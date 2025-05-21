@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import StarRatings from 'react-star-ratings';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { useTheme } from '../context/theme/useTheme';
 import { truncateText } from '../helpers/truncateText';
 import { useGetSearchMovies } from '../api/query/useGetSearchMovies';
 import { getImagePath } from '../helpers/getImagePath';
-import { Link } from 'react-router-dom';
 import { useDebounce } from '../hooks/useDebounce';
+import { getMovieDetailRoute, ROUTES } from '../constants/routes';
 
 export const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+
+  const location = useLocation();
+
+  const navigate = useNavigate();
 
   const [searchText, setSearchText] = useState('');
 
@@ -22,11 +27,29 @@ export const Header: React.FC = () => {
       seartchTextDebounce.trim().length > 0
     );
 
+  const handleNavigateMovie = (id: number) => {
+    setSearchText('');
+
+    navigate(getMovieDetailRoute(id));
+  };
+
+  const handleClickHome = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (location.pathname === ROUTES.HOME) {
+      e.preventDefault(); // Prevent navigation if already on home
+    }
+  };
+
   return (
     <header className="bg-main-bg shadow-main transition-theme top-0 sticky z-10">
       <div className="flex justify-between items-center gap-[20px] p-[20px] min-h-[90px] ">
         <div>
-          <p className="font-logo text-[30px] transition-theme">Movie.okten</p>
+          <Link
+            to={ROUTES.HOME}
+            className="font-logo text-[30px] transition-theme"
+            onClick={handleClickHome}
+          >
+            Movie.okten
+          </Link>
         </div>
 
         <div className="relative flex-1 max-w-[500px]">
@@ -38,11 +61,11 @@ export const Header: React.FC = () => {
           />
           <div
             className={`
-          absolute duration-300 ease-in-out  custom-scrollbar h-[50vh] overflow-y-scroll w-full top-[calc(100%+10px)] left-0 rounded-[10px] shadow bg-dropdown-bg border border-dropdown-border
+          absolute duration-300 ease-in-out  custom-scrollbar overflow-y-scroll w-full top-[calc(100%+10px)] left-0 rounded-[10px] shadow bg-dropdown-bg border border-dropdown-border
          ${
            searchText
-             ? 'opacity-100'
-             : 'translate-y-[20px] opacity-0 pointer-events-nonee'
+             ? 'opacity-100 h-[50vh]'
+             : 'translate-y-[20px] opacity-0 h-[0px] pointer-events-nonee'
          }
          
           `}
@@ -57,8 +80,8 @@ export const Header: React.FC = () => {
               </p>
             ) : (
               searchMovies.map((searchMovie, i) => (
-                <Link
-                  to=""
+                <button
+                  onClick={() => handleNavigateMovie(searchMovie.id)}
                   key={i}
                   className="block px-4 py-2 duration-300 hover:bg-dropdown-list-bg cursor-pointer"
                 >
@@ -68,7 +91,7 @@ export const Header: React.FC = () => {
                       className="h-[90px] w-[70px] object-cover rounded-[8px]"
                     />
 
-                    <div className="flex flex-col gap-[3px] ">
+                    <div className="flex items-start flex-col gap-[3px] ">
                       <h3 className="text-[18px]">{searchMovie.title}</h3>
 
                       <p className="text-[15px]">
@@ -85,7 +108,7 @@ export const Header: React.FC = () => {
                       />
                     </div>
                   </article>
-                </Link>
+                </button>
               ))
             )}
           </div>

@@ -9,6 +9,8 @@ import type { NewestMovieData } from '../types/movieTypes';
 import { getImagePath } from '../helpers/getImagePath';
 import { truncateText } from '../helpers/truncateText';
 import { SkeletonComp } from './SkeletonComp';
+import { Link } from 'react-router-dom';
+import { getMovieDetailRoute } from '../constants/routes';
 
 export const Hero: React.FC = () => {
   const { data, isLoading } = useGetNewestMovies();
@@ -65,9 +67,12 @@ function HeroItem({ id, title, overview, poster_path }: NewestMovieData) {
             {truncateText(overview, 200)}
           </p>
 
-          <button className="uppercase font-bold text-[18px] min-w-[150px] hover:opacity-[0.8] cursor-pointer duration-500 hover:duration-500   text-main-button bg-main-button-bg py-[8px] px-[13px] text-white rounded-[10px] ">
-            open {id}
-          </button>
+          <Link
+            to={getMovieDetailRoute(id)}
+            className="block text-center uppercase font-bold text-[18px] min-w-[150px] hover:opacity-[0.8] cursor-pointer duration-500 hover:duration-500   text-main-button bg-main-button-bg py-[8px] px-[13px] text-white rounded-[10px] "
+          >
+            open
+          </Link>
         </div>
 
         <img

@@ -35,8 +35,25 @@ export type MovieOptionsType = {
 };
 
 export type SearchMovieType = {
+  id: number;
   title: string;
   vote_average: number;
   poster_path: string;
+  overview: string;
+};
+
+export type MovieFullType = {
+  poster_path: string;
+  title: string;
+  vote_average: string;
+  vote_count: string;
+  genres: { name: string; id: number }[];
+  production_countries: { name: string }[];
+  production_companies: {
+    id: number;
+    logo_path: string;
+    name: string;
+    origin_country: string;
+  }[];
   overview: string;
 };

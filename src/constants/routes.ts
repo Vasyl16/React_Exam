@@ -3,4 +3,4 @@ export const ROUTES = {
   MOVIE: '/movie/:id',
 };
 
-export const getMovieDetailRoute = (id: string) => `/movie/${id}`;
+export const getMovieDetailRoute = (id: number) => `/movie/${id}`;
