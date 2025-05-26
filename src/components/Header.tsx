@@ -7,7 +7,8 @@ import { truncateText } from '../helpers/truncateText';
 import { useGetSearchMovies } from '../api/query/useGetSearchMovies';
 import { getImagePath } from '../helpers/getImagePath';
 import { useDebounce } from '../hooks/useDebounce';
-import { getMovieDetailRoute, ROUTES } from '../constants/routes';
+
+import { BASE_URL, getMovieDetailRoute, ROUTES } from '../constants/routes';
 
 export const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -72,7 +73,7 @@ export const Header: React.FC = () => {
           >
             {isLoadingSearchMovies ? (
               <svg className="h-[30px] w-[30px] object-cover m-[20px_auto_0] spin-endless stroke-main-text duration-500 ">
-                <use href="/icons/sprite.svg#loader-icon"></use>
+                <use href={`${BASE_URL}/icons/sprite.svg#loader-icon`}></use>
               </svg>
             ) : searchMovies.length === 0 ? (
               <p className="text-center text-[20px] mt-[20px]">
@@ -144,7 +145,7 @@ export const Header: React.FC = () => {
             >
               <img
                 className="h-[46px] w-[46px] rounded-full"
-                src="/img/header/header-avatar.png"
+                src={`${BASE_URL}/img/header/header-avatar.png`}
               />
               <p className="text-[16px] font-semibold">Vasyl </p>
             </button>

@@ -2,7 +2,7 @@ import React from 'react';
 import StarRatings from 'react-star-ratings';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import { ROUTES } from '../constants/routes';
+import { BASE_URL, ROUTES } from '../constants/routes';
 import { useGetMovieFull } from '../api/query/useGetMovieFull';
 import { getImagePath } from '../helpers/getImagePath';
 
@@ -23,7 +23,7 @@ export const MovieFull: React.FC = () => {
     return (
       <div>
         <svg className="h-[30px] w-[30px] object-cover m-[40px_auto_0] spin-endless stroke-main-text duration-500 ">
-          <use href="/icons/sprite.svg#loader-icon"></use>
+          <use href={`${BASE_URL}/icons/sprite.svg#loader-icon`}></use>
         </svg>
       </div>
     );

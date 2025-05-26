@@ -3,6 +3,8 @@ import { useState } from 'react';
 import type { SortOptionType } from '../types/movieTypes';
 import { SORT_OPTIONS } from '../constants/movieConstants';
 
+import { BASE_URL } from '../constants/routes';
+
 export const SortDropdown = ({
   selected,
   setSelected,
@@ -27,7 +29,7 @@ export const SortDropdown = ({
               isOpen && 'rotate-180'
             }`}
           >
-            <use href="/icons/sprite.svg#up-icon"></use>
+            <use href={`${BASE_URL}/icons/sprite.svg#up-icon`}></use>
           </svg>
         </span>
       </button>
