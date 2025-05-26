@@ -58,7 +58,7 @@ export const SortDropdown = ({
                   setIsOpen(false);
                 }
               }}
-              className={`px-4 py-2 duration-300 hover:bg-dropdown-list-bg cursor-pointer ${
+              className={`text-main-text px-4 py-2 duration-300 hover:bg-dropdown-list-bg cursor-pointer ${
                 option.name === selected.name &&
                 'bg-dropdown-list-bg pointer-events-none cursor-default'
               }`}

@@ -39,8 +39,11 @@ export const movieSlice = createSlice({
       fetchMovies.fulfilled,
       (state, action: PayloadAction<MovieSliceState>) => {
         state.status = 'success';
-        state.page = action.payload.page;
         state.total_pages = restrictPages(action.payload.total_pages);
+        state.page =
+          action.payload.page > state.total_pages
+            ? state.total_pages
+            : action.payload.page;
         state.results = action.payload.results;
       }
     );

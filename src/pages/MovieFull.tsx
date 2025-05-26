@@ -17,8 +17,6 @@ export const MovieFull: React.FC = () => {
 
   const { data: movieData, isLoading, error } = useGetMovieFull(id);
 
-  console.log(movieData);
-
   if (isLoading) {
     return (
       <div>
@@ -115,10 +113,12 @@ export const MovieFull: React.FC = () => {
                       key={company.id}
                     >
                       <span>{company.name}</span>{' '}
-                      <img
-                        className="w-[20px] h-[20px] object-fill"
-                        src={getImagePath(company.logo_path)}
-                      />{' '}
+                      {company.logo_path && (
+                        <img
+                          className="w-[20px] h-[20px] object-fill"
+                          src={getImagePath(company.logo_path)}
+                        />
+                      )}
                       <span>{company.origin_country}</span>
                       {i + 1 !== movieData.production_companies.length &&
                         ','}{' '}

@@ -46,7 +46,7 @@ export const Header: React.FC = () => {
         <div>
           <Link
             to={ROUTES.HOME}
-            className="font-logo text-[30px] transition-theme"
+            className="font-logo text-main-text text-[30px]"
             onClick={handleClickHome}
           >
             Movie.okten
@@ -84,7 +84,7 @@ export const Header: React.FC = () => {
                 <button
                   onClick={() => handleNavigateMovie(searchMovie.id)}
                   key={i}
-                  className="block px-4 py-2 duration-300 hover:bg-dropdown-list-bg cursor-pointer"
+                  className="block w-full px-4 py-2 duration-300 hover:bg-dropdown-list-bg cursor-pointer"
                 >
                   <article className="flex gap-[20px]">
                     <img
@@ -93,9 +93,11 @@ export const Header: React.FC = () => {
                     />
 
                     <div className="flex items-start flex-col gap-[3px] ">
-                      <h3 className="text-[18px]">{searchMovie.title}</h3>
+                      <h3 className="text-left text-[18px] text-main-text ">
+                        {searchMovie.title}
+                      </h3>
 
-                      <p className="text-[15px]">
+                      <p className="text-[15px] text-left text-main-text ">
                         {truncateText(searchMovie.overview, 50)}
                       </p>
 
@@ -147,7 +149,7 @@ export const Header: React.FC = () => {
                 className="h-[46px] w-[46px] rounded-full"
                 src={`${BASE_URL}/img/header/header-avatar.png`}
               />
-              <p className="text-[16px] font-semibold">Vasyl </p>
+              <p className="text-[16px] text-main-text font-semibold">Vasyl </p>
             </button>
           </div>
         </div>
