@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import './styles/App.css';
+import './styles/app.css';
 import './styles/theme.css';
 import { AppRoutes } from './routes/AppRoutes';
 import { AppProvider } from './provider/AppProvider';
