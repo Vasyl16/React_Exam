@@ -4,6 +4,6 @@ import { MOVIE_BASE_URL } from '../../constants/api';
 export const axiosMovieInstance = axios.create({
   baseURL: MOVIE_BASE_URL,
   headers: {
-    Authorization: `Bearer ${import.meta.env.VITE_MOVIE_TOKEN}`,
+    Authorization: `Bearer ${process.env.MOVIE_TOKEN}`,
   },
 });
